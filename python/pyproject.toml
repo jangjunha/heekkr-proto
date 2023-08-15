@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "heekkr"
-version = "0.1.0"
+version = "0.0.0"
 description = ""
 authors = ["jangjunha <hi@jangjunha.me>"]
 readme = "README.md"
 packages = [{include = "heekkr"}]
-exclude = ["generate.py"]
+include = ["heekkr/*"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

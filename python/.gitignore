@@ -1,4 +1,5 @@
-heekkr/
+heekkr/*
+!heekkr/__init__.py
 
 ### VirtualEnv
 # Virtualenv
