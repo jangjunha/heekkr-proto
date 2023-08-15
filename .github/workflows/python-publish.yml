@@ -1,0 +1,75 @@
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+env:
+  GCP_PROJECT_ID: heekkr
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: gcp
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: python
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure Environment Variables
+        run: |
+          TAG_NAME=${{ github.event.release.tag_name }}
+          VERSION=${TAG_NAME#"v"}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Google auth
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_WIF_SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+
+      - name: Install Hatch
+        run: pip install hatch
+
+      - name: Set package version
+        run: |
+          echo 'VERSION = "0.0.0"' > VERSION
+          hatch version "$VERSION"
+
+      - name: Build package
+        run: |
+          hatch run generate
+          hatch build
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: python/dist
+
+      - name: Publish package
+        run: |
+          PYTHON_KEYRING_BACKEND="keyring.backends.null.Keyring" \
+          HATCH_INDEX_AUTH="$(gcloud config config-helper --format='value(credential.access_token)')" \
+          hatch publish \
+            -r "https://asia-northeast3-python.pkg.dev/heekkr/heekkr-python/" \
+            -u oauth2accesstoken

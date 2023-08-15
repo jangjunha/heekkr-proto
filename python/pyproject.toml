@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "heekkr"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = []
+authors = [
+  { name = "jangjunha", email = "hi@jangjunha.me" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "protobuf >= 4.24.0, < 5",
+  "grpcio >= 1.57.0, < 2",
+]
+
+[project.urls]
+Documentation = "https://github.com/jangjunha/heekkr-proto#readme"
+Issues = "https://github.com/jangjunha/heekkr-proto/issues"
+Source = "https://github.com/jangjunha/heekkr-proto"
+
+[tool.hatch.version]
+path = "VERSION"
+
+[tool.hatch.build]
+ignore-vcs = true
+
+[tool.hatch.build.targets]
+include = [
+  '/README.md',
+  '/src/heekkr',
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "grpcio-tools",
+  "keyrings.google-artifactregistry-auth",
+]
+[tool.hatch.envs.default.scripts]
+generate = [
+  "rm -rf src/",
+  "mkdir -p src/heekkr/",
+  "find ../protos -name \"*.proto\" | xargs python -m grpc_tools.protoc -I ../protos/ --python_out ./src/heekkr/ --grpc_python_out ./src/heekkr/",
+  "touch ./src/heekkr/__init__.py",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
