@@ -1,7 +1,11 @@
-# heekkr-proto
+# heekkr
 
-## Build
+![GitHub release](https://img.shields.io/github/v/release/jangjunha/heekkr-proto)
 
-```bash
-$ poetry build
+-----
+
+## Installation
+
+```console
+pip install heekkr
 ```
