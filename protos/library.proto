@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "common.proto";
+
+message Library {
+  string id = 1;
+  string name = 2;
+  string resolver_id = 3;
+  LatLng coordinate = 4;
+}

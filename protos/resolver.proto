@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "common.proto";
+import "book.proto";
+import "library.proto";
+
+service Resolver {
+  rpc GetLibraries(GetLibrariesRequest) returns (GetLibrariesResponse);
+  rpc Search(SearchRequest) returns (stream SearchResponse);
+}
+
+message GetLibrariesRequest {}
+
+message GetLibrariesResponse {
+  repeated Library libraries = 1;
+}
+
+message SearchRequest {
+  repeated string library_ids = 1;
+  string term = 2;
+}
+
+message SearchResponse {
+  repeated SearchEntity entities = 1;
+}
+
+message SearchEntity {
+  Book book = 1;
+  repeated HoldingSummary holding_summaries = 2;
+}
+
+message HoldingSummary {
+  optional string call_number = 1;
+  optional string location = 2;
+  optional uint32 totals = 3;
+  optional bool is_available = 4;
+  optional uint32 availables = 5;
+  optional bool is_requested = 6;
+  optional uint32 requests = 7;
+  optional Date due = 8;
+}
+
+message HoldingItem {
+  optional string call_number = 1;
+  optional string registration_number = 2;
+  optional string location = 3;
+  optional HoldingStatus status = 4;
+}
+
+message HoldingStatus {
+  oneof holding_status_oneof {
+    AvailableStatus available = 1;
+    OnLoanStatus on_loan = 2;
+    UnavailableStatus unavailable = 3;
+  }
+}
+
+message AvailableStatus {
+  optional string detail = 1;
+}
+
+message OnLoanStatus {
+  optional Date due = 1;
+  optional uint32 waitings = 2;
+  optional bool waiting_available = 3;
+}
+
+message UnavailableStatus {
+  optional string detail = 1;
+}

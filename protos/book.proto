@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message Book {
+  string isbn = 1;
+  string title = 2;
+  optional string description = 3;
+  optional string author = 4;
+  optional string publisher = 5;
+  optional PublishDate publish_date = 6;
+}
+
+message PublishDate {
+  int32 year = 1;
+  optional int32 month = 2;
+  optional int32 day = 3;
+}
