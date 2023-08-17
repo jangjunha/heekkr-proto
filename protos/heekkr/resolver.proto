@@ -1,8 +1,10 @@
 syntax = "proto3";
 
-import "common.proto";
-import "book.proto";
-import "library.proto";
+package kr.heek;
+
+import "heekkr/common.proto";
+import "heekkr/book.proto";
+import "heekkr/library.proto";
 
 service Resolver {
   rpc GetLibraries(GetLibrariesRequest) returns (GetLibrariesResponse);

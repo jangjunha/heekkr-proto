@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package kr.heek;
+
 message Date {
   int32 year = 1;
   int32 month = 2;

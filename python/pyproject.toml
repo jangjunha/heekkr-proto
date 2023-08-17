@@ -54,7 +54,7 @@ dependencies = [
 generate = [
   "rm -rf src/",
   "mkdir -p src/heekkr/",
-  "find ../protos -name \"*.proto\" | xargs python -m grpc_tools.protoc -I ../protos/ --python_out ./src/heekkr/ --grpc_python_out ./src/heekkr/",
+  "find ../protos -name \"*.proto\" | xargs python -m grpc_tools.protoc -I ../protos/ --python_out ./src/ --grpc_python_out ./src/",
   "touch ./src/heekkr/__init__.py",
 ]
 

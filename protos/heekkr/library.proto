@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-import "common.proto";
+package kr.heek;
+
+import "heekkr/common.proto";
 
 message Library {
   string id = 1;
