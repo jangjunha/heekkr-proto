@@ -70,4 +70,6 @@ message OnLoanStatus {
 
 message UnavailableStatus {
   optional string detail = 1;
+  optional uint32 waitings = 2;
+  optional bool waiting_available = 3;
 }
