@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "kr.heek";
+
+package kr.heek;
+
+import "heekkr/common.proto";
+
+message HoldingSummary {
+  string library_id = 1;
+  optional string location = 2;
+  optional string call_number = 3;
+  optional HoldingStatus status = 4;
+}
+
+message HoldingStatus {
+  oneof state_oneof {
+    AvailableStatus available = 1;
+    OnLoanStatus on_loan = 2;
+    UnavailableStatus unavailable = 3;
+  }
+  optional uint32 totals = 10;
+  optional bool is_available = 11;
+  optional uint32 availables = 12;
+  optional bool is_requested = 13;
+  optional uint32 requests = 14;
+  optional bool requests_available = 15;
+}
+
+message AvailableStatus {
+  optional string detail = 1;
+}
+
+message OnLoanStatus {
+  optional string detail = 1;
+  optional DateTime due = 2;
+}
+
+message UnavailableStatus {
+  optional string detail = 1;
+}

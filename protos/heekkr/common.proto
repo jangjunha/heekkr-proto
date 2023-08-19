@@ -11,6 +11,17 @@ message Date {
   int32 day = 3;
 }
 
+message Time {
+  int32 hour = 1;
+  int32 minutes = 2;
+  int32 seconds = 3;
+}
+
+message DateTime {
+  Date date = 1;
+  optional Time time = 2;
+}
+
 message LatLng {
   double latitude = 1;
   double longitude = 2;
