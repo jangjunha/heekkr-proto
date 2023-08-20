@@ -31,4 +31,5 @@ message SearchEntity {
   Book book = 1;
   repeated HoldingSummary holding_summaries = 2;
   double score = 3;
+  string url = 4;
 }

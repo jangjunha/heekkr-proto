@@ -32,4 +32,5 @@ message SearchResponse {
 message SearchEntity {
   Book book = 1;
   repeated HoldingSummary holding_summaries = 2;
+  string url = 3;
 }
