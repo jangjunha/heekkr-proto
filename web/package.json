@@ -1,5 +1,5 @@
 {
-  "name": "heekkr",
+  "name": "@heekkr/heekkr",
   "packageManager": "yarn@3.6.2",
   "version": "0.0.0",
   "publishConfig": {

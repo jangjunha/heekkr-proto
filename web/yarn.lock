@@ -5,6 +5,15 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@heekkr/heekkr@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@heekkr/heekkr@workspace:."
+  dependencies:
+    google-protobuf: ^3.21.2
+    grpc-web: ^1.4.2
+  languageName: unknown
+  linkType: soft
+
 "google-protobuf@npm:^3.21.2":
   version: 3.21.2
   resolution: "google-protobuf@npm:3.21.2"
@@ -18,12 +27,3 @@ __metadata:
   checksum: 624bb14bb3a5bcd5354cce6b4873b90b574a32227abdc29f241b2dbc81363492f49dcbd257a47963bdd8e61a49b69303bd03087f42d939d48148b4764bf2a2e6
   languageName: node
   linkType: hard
-
-"heekkr@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "heekkr@workspace:."
-  dependencies:
-    google-protobuf: ^3.21.2
-    grpc-web: ^1.4.2
-  languageName: unknown
-  linkType: soft

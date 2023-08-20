@@ -12,14 +12,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],\
     "dependencyTreeRoots": [\
       {\
-        "name": "heekkr",\
+        "name": "@heekkr/heekkr",\
         "reference": "workspace:."\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["heekkr", ["workspace:."]]\
+      ["@heekkr/heekkr", ["workspace:."]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -28,6 +28,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["google-protobuf", "npm:3.21.2"],\
+            ["grpc-web", "npm:1.4.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@heekkr/heekkr", [\
+        ["workspace:.", {\
+          "packageLocation": "./",\
+          "packageDependencies": [\
+            ["@heekkr/heekkr", "workspace:."],\
             ["google-protobuf", "npm:3.21.2"],\
             ["grpc-web", "npm:1.4.2"]\
           ],\
@@ -50,17 +61,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["grpc-web", "npm:1.4.2"]\
           ],\
           "linkType": "HARD"\
-        }]\
-      ]],\
-      ["heekkr", [\
-        ["workspace:.", {\
-          "packageLocation": "./",\
-          "packageDependencies": [\
-            ["heekkr", "workspace:."],\
-            ["google-protobuf", "npm:3.21.2"],\
-            ["grpc-web", "npm:1.4.2"]\
-          ],\
-          "linkType": "SOFT"\
         }]\
       ]]\
     ]\
