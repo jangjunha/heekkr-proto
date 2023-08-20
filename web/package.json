@@ -2,6 +2,9 @@
   "name": "heekkr",
   "packageManager": "yarn@3.6.2",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://asia-northeast3-npm.pkg.dev/heekkr/heekkr-npm/"
+  },
   "scripts": {
     "clean": "rm -rf heekkr/",
     "generate": "yarn clean && find ../protos/ -name \"*.proto\" | xargs protoc -I../protos/ --js_out=import_style=commonjs:. --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:."
