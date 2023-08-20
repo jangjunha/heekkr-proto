@@ -2,6 +2,8 @@
   "name": "@heekkr/heekkr",
   "packageManager": "yarn@3.6.2",
   "version": "0.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
   "publishConfig": {
     "registry": "https://asia-northeast3-npm.pkg.dev/heekkr/heekkr-npm/"
   },
