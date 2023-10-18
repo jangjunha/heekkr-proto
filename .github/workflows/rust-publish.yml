@@ -1,0 +1,45 @@
+name: Upload Rust Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: crates.io
+    defaults:
+      run:
+        working-directory: rust
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure Environment Variables
+        run: |
+          TAG_NAME=${{ github.event.release.tag_name }}
+          VERSION=${TAG_NAME#"v"}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+          mkdir -p "$HOME/.local/bin/"
+          echo "$HOME/.local/bin/" >> $GITHUB_PATH
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Set up protoc and plugins
+        working-directory: /tmp/
+        run: |
+          curl -sL 'https://github.com/protocolbuffers/protobuf/releases/download/v24.1/protoc-24.1-linux-x86_64.zip' -o protoc.zip
+          unzip protoc.zip -d protoc/
+          cp protoc/bin/protoc $HOME/.local/bin/
+
+      - name: Configure Version
+        run: |
+          sed -i -e 's/version = "0.0.0"/version = "'"$VERSION"'"/' Cargo.toml
+
+      - run: cargo publish --allow-dirty --no-verify --token ${CRATES_TOKEN}
+        env:
+          CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
