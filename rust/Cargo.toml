@@ -1,0 +1,15 @@
+[package]
+name = "heekkr"
+description = "heekkr spec"
+license = "MIT"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+tonic = "0.10.2"
+prost = "0.12"
+prost-types = "0.12"
+
+[build-dependencies]
+glob = "0.3.1"
+tonic-build = "0.10.2"
